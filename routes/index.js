@@ -4,7 +4,6 @@ var Account = require('../models/account');
 var Poll = require('../models/poll');
 var Log = require('../models/log');
 var useragent = require('express-useragent');
-var bcrypt = require('bcrypt-nodejs');
 var router = express.Router();
 
 /* GET home page. */
