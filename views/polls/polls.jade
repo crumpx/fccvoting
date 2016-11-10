@@ -1,0 +1,13 @@
+extends ../layout
+
+block content
+	.container
+		h1 All Polls
+
+		br
+		each poll in polls
+			h3 
+				a(href="/poll/#{poll._id}") #{poll.title}
+
+
+			

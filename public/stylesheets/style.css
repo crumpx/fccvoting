@@ -1,0 +1,17 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+.input-group {
+	padding-bottom: 20px;
+}
+
+.polls {
+	margin: 15px;
+	border: 1px solid red;
+}

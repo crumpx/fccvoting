@@ -1,0 +1,20 @@
+extends layout
+
+block content
+	if (!user)
+		a(href="/login") Login
+		br
+		a(href="/register") Register
+	if (user)
+		a(href='/new/poll') Create a Poll
+		br
+		a(href='/dashboard') Dashboard
+		p You are currently logged in as #{user.username}
+		a(href="/logout") Logout
+
+	.polls
+		each poll in polls
+			h4 
+				a(href="/poll/#{poll._id}") #{poll.title}
+
+//- index should have navbar, new polls listed, a search box to search poll title.
