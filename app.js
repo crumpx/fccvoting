@@ -5,7 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var cookieParser = require('cookie-parser');
-var dburi = 'mongodb://crump:kpsd225@ds143707.mlab.com:43707/heroku_s10nmxhs';
+
 
 var mongoose = require('mongoose');
 var passport = require('passport');
@@ -52,7 +52,7 @@ passport.serializeUser(Account.serializeUser());
 passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
-mongoose.connect(dburi);
+mongoose.connect(process.env.MONGODB_URI);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
