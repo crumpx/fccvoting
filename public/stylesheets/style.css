@@ -1,17 +1,76 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+nav {
+	background-color: pink;
+	padding:2px;
+	border-bottom: 1px solid grey;
+
+}
+header nav ul {
+	list-style: none;
+	text-align: right;
 }
 
-a {
-  color: #00B7FF;
+header nav ul li {
+	display: inline-block;
+	padding-right: 10px;
 }
 
-.input-group {
-	padding-bottom: 20px;
+header nav ul span {
+
 }
 
-.polls {
-	margin: 15px;
-	border: 1px solid red;
+header nav ul li a {
+	text-decoration: none;
+	padding: 8px 12px;
+}
+
+header nav ul li a:hover {
+	background-color: orangered;
+	color: white;
+	border-radius: 5px;
+}
+
+.username-button{
+	text-decoration: none;
+	padding: 8px 12px;
+}
+
+.username-button:hover{
+	background-color: orangered;
+	color: white;
+	border-radius: 5px;
+}
+
+.navbar {
+	display: flex;
+	align-items: center;
+	flex-direction:row;
+}
+
+.navbar .brand {
+	margin-left: 12px;
+	order: 2;
+}
+.navbar .nav-menu {
+	order: 1;
+}
+
+.wrapper {
+	margin-left: 20px;
+	display: flex;
+	align-items: center;
+}
+
+.wapper .content-container {
+
+}
+
+.poll-list a {
+	text-decoration: none;
+	color: orange;
+}
+
+.poll-list a:hover {
+	background-color: orangered;
+	color: white;
+	border-radius: 5px;
 }

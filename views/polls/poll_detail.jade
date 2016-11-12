@@ -1,25 +1,36 @@
 extends ../layout
 
 block content
-	.container
-		h1 #{poll.title} 
-		if (owner)
-			a(href='edit/#{poll._id}') Edit (not yet)
-			br
-			a(href='delete/#{poll._id}' onclick="return confirm('Are you sure you want to delete this item?');") Delete (not yet)
-		h4 By --#{poll.author.username}
-		br
-		if (voted)
-			ul
-			for option in poll.options
-				li #{option.text} / #{option.count} votes
-
-		if (!voted)
-			form(method='POST' action='?')
-				.pullOptions
+	content
+		.wrapper
+			.content-container
+				h1 #{poll.title} 
+				if (owner)
+					.btn.btn-success
+						a(href='edit/#{poll._id}') Edit
+					.btn.btn-danger
+						a(href='delete/#{poll._id}' onclick="return confirm('Are you sure you want to delete this item?');") Delete
+					.btn.btn-warning
+						if (poll.disabled)
+							a(href='toggle/#{poll._id}') active
+						if (!poll.disabled)
+							a(href='toggle/#{poll._id}') deactive
+				h4 Started By 
+					a(href='/dashboard/#{poll.author.username}') #{poll.author.username}
+				br
+				if (voted)
 					for option in poll.options
-						input(type='radio' name=poll._id value = option._id)
-						| #{option.text} -- #{option.count}
-						br
-					input(type='submit' value='Vote!')
+						.voteList
+							button.btn.btn-primary #{option.text} 
+								span.badge 
+									| #{option.count} votes
+
+				if (!voted)
+					form#voting(method='POST' action='?' onsubmit="return $('#submitVote').prop('disabled', true);")
+						.pullOptions
+							for option in poll.options
+								input(type='radio' name=poll._id value = option._id)
+								| #{option.text} -- #{option.count}
+								br
+							input#submitVote(type='submit' value='Vote!')
 

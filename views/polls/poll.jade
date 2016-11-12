@@ -4,7 +4,6 @@ block content
   .container
     h1 New Poll
 
-    h4 Once the poll is created, you won't be able to change its options!
     br
     form(role='form', action="/new/poll",method="post", style='max-width: 300px;')
       .form-group
@@ -16,6 +15,11 @@ block content
           input.form-control(type='text', name="options", placeholder='option')
           span.input-group-btn
             a.btn.btn-primary.addButton +
+        .input-group
+          input.form-control(type='text', name="options", placeholder='option')
+          span.input-group-btn
+            a.btn.btn-primary.addButton +
+
       button.btn.btn-default(type='submit') Submit
       &nbsp;
       a(href='/')

@@ -1,17 +1,42 @@
 doctype html
 html
-  head
-    title= title
-    meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    link(href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css', rel='stylesheet', media='screen')
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    block head
+	head
+		title= title
+		meta(name='viewport', content='width=device-width, initial-scale=1.0')
+		//- link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet', media='screen')
+		link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css')
+		link(rel='stylesheet', href='/stylesheets/style.css')
+		block head
 
+	body
+		header
+			nav
+				.navbar
+					.brand
+						if (user)
+							span Logged in As 
+								a.username-button(href='/dashboard') #{user.username}
+					.nav-menu
+						ul
+							li
+								a(href='/') Home
+							if (!user)
+								li
+									a(href="/login") Login
+								li
+									a(href="/register") Register
+							if (user)
+								li
+									a(href='/new/poll') Create a Poll
+								li
+									a(href='/dashboard') Dashboard
+								
+								li
+									a(href="/logout") Logout
 
-  body
-    block content
+		block content
 
-  script(src='http://code.jquery.com/jquery.js')
-  script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js')
-  script(src='/javascripts/javascript.js')
-  script(src='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js')
+	script(src='https://code.jquery.com/jquery-3.1.1.min.js')
+	script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js')
+	script(src='/javascripts/javascript.js')
+	script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')

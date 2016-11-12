@@ -7,14 +7,12 @@ var Log = new Schema({
 	ip: String,
     voter: {
         type: Schema.ObjectId,
-        ref: 'Account',
+        ref: 'Account'
     },
     poll: {
     	type: Schema.ObjectId,
-    	ref: 'Poll',
+    	ref: 'Poll'
     },
-    // cookie: String,
-    // userAgent: String,
     date: {type: Date, defalut: Date.now},
  });
 

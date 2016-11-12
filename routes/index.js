@@ -8,28 +8,24 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	console.log(req.ip);
-	console.log(req.cookies)
-
-	// var head = useragent.parse(req.headers['user-agent']);
-	// console.log(head.browser);
-
-	Poll.find({}).select({title:1, options:1, author:1}).exec(function(err, result){
+	Poll.find({}).select({title:1, author:1, disabled:1})
+	.populate('author')
+	.exec(function(err, result){
 	if (err) console.log(err);
-	console.log(result)
 	res.render('index', {polls: result, title: "All Polls", user:req.user});
 	});
 }); 
 
 router.get('/register', function(req, res){
 	res.render('users/register', {});
-})
+});
 
 router.post('/register', function(req, res){
 	Account.register(new Account({ username: req.body.username}),
 		req.body.password, function(err, account){
 			if (err) {
-				return res.render('register', {account: account});
+				console.log(err);
+				return res.render('users/register', {account: account, error:err});
 			}
 			passport.authenticate('local')(req, res, function(){
 				res.redirect('/');
@@ -58,11 +54,11 @@ router.get('/dashboard', function(req, res){
 			.exec(function(err, docs){
 				if (err) console.log(err);
 				votedOn = docs;
-				res.render('users/dashboard', {user: req.user, ownPoll:ownPoll, votedOn: votedOn})
-		})
+				res.render('users/dashboard', {ownPage: true, user: req.user, ownPoll:ownPoll, votedOn: votedOn});
+		});
 		});
 	}
-})
+});
 
 router.post('/dashboard', function(req, res){
 	var password = req.body.newPassword;
@@ -73,13 +69,38 @@ router.post('/dashboard', function(req, res){
 			user.setPassword(password, function(){
 			user.save();
 			res.status(200).redirect('/');
-			})
+			});
 		} else {
 			res.status(500).json({message: 'this user does not exist'});
 		}
 	}, function(err){
 		console.log(err);
+	});
+});
+
+router.get('/dashboard/:username',function(req, res){
+	var id = req.user._id;
+	var ownPage = false
+	Account.findByUsername(req.params.username).then(function(user){
+		if (user.id == id) {
+			ownPage = true;
+		} 
+
+		var ownPoll, votedOn;
+		Poll.find({author: user._id}, function(err, docs){
+			if (err) console.log(err);
+			ownPoll = docs;
+			Log.find({voter: user._id})
+			.populate('poll')
+			.exec(function(err, docs){
+				if (err) console.log(err);
+				votedOn = docs;
+				res.render('users/dashboard', {ownPage: ownPage, user: user, ownPoll:ownPoll, votedOn: votedOn});
+		});
+		});
+
 	})
+
 })
 
 router.get('/logout', function(req, res){
@@ -92,16 +113,16 @@ router.get('/users', function(req, res){
 	console.log(req.user);
 });
 
-router.get('/polls', function(req, res){
-	Poll.find({}).select({title:1, options:1, author:1}).exec(function(err, result){
-		if (err) console.log(err);
-		console.log(result)
-		res.render('polls/polls', {polls: result, title: "All Polls"});
-	})
-}); 
+// router.get('/polls', function(req, res){
+// 	Poll.find({}).select({title:1, options:1, author:1}).exec(function(err, result){
+// 		if (err) console.log(err);
+// 		console.log(result);
+// 		res.render('polls/polls', {polls: result, title: "All Polls"});
+// 	});
+// }); 
 
 router.get('/poll/:pollid', function(req, res){
-	console.log("Enter my ralm! You came from ",req.url);
+	console.log("You came from ",req.url);
 	var opId = req.params.pollid;
 	//check cookies, user, and ip
 	var ip = req.ip;
@@ -121,9 +142,8 @@ router.get('/poll/:pollid', function(req, res){
 			query = { ip: req.ip, poll: opId};
 		}
 	} else {
-		//have user
-		query = { voter:user._id, poll: opId};
-	}
+			query = {voter:user._id, poll: opId};
+		}
 
 	if (!voted) {
 		Log.find(query, function(err, doc){
@@ -139,21 +159,16 @@ router.get('/poll/:pollid', function(req, res){
 	Poll.findOne({_id:req.params.pollid}).populate('author').exec(function(err, doc){
 		if (err) console.log(err);
 		if (user) {
-			owner = user.username ==doc.author.username;
+			owner = user.username == doc.author.username;
 		}
-
-
-		console.log("The owner is",owner);
-		res.render('polls/poll_detail', {poll: doc, voted: voted, owner: owner});
-	})
-}) 
+		res.render('polls/poll_detail', {poll: doc, voted: voted, owner: owner, user: req.user});
+	});
+}) ;
 
 router.post('/poll/:pollid', function(req, res){
 	var opId = req.params.pollid;
 	var voter = req.user ? req.user._id:'';
 	var ip = req.ip;
-	// var agent = useragent.parse(req.headers['user-agent']);
-	// var cookie = agent.browser;
 	var log;
 	if (voter) {
 		log = new Log({ip: ip, voter: voter, poll: opId});	 
@@ -163,7 +178,7 @@ router.post('/poll/:pollid', function(req, res){
 
 	log.save(function(err, result){
 		if (err) {
-			console.log(err)
+			console.log(err);
 		} else {
 			console.log(result);
 			Poll.findOne({_id:req.params.pollid})
@@ -183,7 +198,7 @@ router.get('/new/poll', function(req, res){
 	if (req.user === undefined){
 		res.redirect('/');
 	} else {
-		res.render('polls/poll',{});
+		res.render('polls/poll',{user:req.user});
 	}
 });
 
@@ -191,9 +206,9 @@ router.post('/new/poll', function(req, res){
 	console.log(typeof req.body.polltitle);
 	var title = req.body.polltitle;
 	var options = req.body.options;
-	var options = options.map(function(val){
+	options = options.map(function(val){
 		return {text: val, count:0};	
-	})
+	});
 
 	var id = req.user._id;
 	console.log(options);
@@ -201,7 +216,7 @@ router.post('/new/poll', function(req, res){
 		title: title,
 		options: options,
 		author: id
-	})
+	});
 
 	var poll = new Poll({
 		title: title,
@@ -209,11 +224,77 @@ router.post('/new/poll', function(req, res){
 		author: id
 	});
 	poll.save(function(err){
-		if (err) {console.log(err)}
-		else {console.log('ok~~~SAVED!!!')}
-	})
+		if (err) {console.log(err);}
+		else {console.log('ok~~~SAVED!!!');}
+	});
 
 	res.redirect('/');
-}) 
+});
+
+router.get('/poll/edit/:id',function(req, res){
+	var id = req.params.id;
+	if (req.user) {
+	Poll.findById(id, function(err, doc){
+		if (err) {console.log(err);}
+		else {
+			res.render('polls/poll_edit', {doc: doc});
+		}
+	});
+	} else {
+		res.status(500).redirect('/login');
+	}
+});
+
+router.post('/poll/edit/:id',function(req, res){
+	var id = req.params.id;
+	var title = req.body.title;
+	var options = Array.isArray(req.body.options)?req.body.options.map(function(val){
+		return {text:val, count:0}
+	}) : req.body.options;
+
+	Poll.findOne({_id:id})
+	.update({title:title}, 
+		Array.isArray(options)?{$push: {options:{$each: options}}}:{$push: {options:{text:options, count:0}}}, 
+		{upsert:true}, 
+		function(err, result){
+		if (err) console.log(err);
+		res.redirect('/poll/'+id)
+	});
+});
+
+router.get('/poll/delete/:id',function(req, res){
+	var id = req.params.id;
+	Poll.remove({_id: id},function(err, result){
+		if (err) {console.log(err)}
+			else {
+				Log.remove({poll:id}, function(err){
+					if (err) {console.log(err)}
+						else {res.redirect('/dashboard')}
+				});
+			}
+	});
+});
+
+router.get('/poll/toggle/:id', function(req, res){
+	var id = req.params.id;
+	Poll.findOne({_id: id}, function(err, doc){
+		doc.update({$set: {disabled: !doc.disabled}}, function(err, result){
+			if (err) {console.log(err);}
+				else {
+				res.redirect('/');
+				}
+		})
+	})
+	
+});
+
+router.get('/clear', function(req, res){
+	  Log.remove({poll:''}, function(err){
+    if (err) throw err;
+    else {
+    	res.redirect('/dashboard')
+    }
+  });
+})
 
 module.exports = router;
