@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var user = require('./account');
+var log = require('./log');
 
 var Poll = new Schema({
     title: {
@@ -17,6 +18,10 @@ var Poll = new Schema({
         default: false,
     },
     date: {type: Date, defalut: Date.now},
+});
+
+Poll.pre('remove', function(next){
+    this.model('Log').remove({poll:this._id}, next);
 });
 
 

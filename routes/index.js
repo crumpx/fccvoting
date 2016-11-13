@@ -99,9 +99,9 @@ router.get('/dashboard/:username',function(req, res){
 		});
 		});
 
-	})
+	});
 
-})
+});
 
 router.get('/logout', function(req, res){
 	req.logout();
@@ -206,17 +206,26 @@ router.post('/new/poll', function(req, res){
 	console.log(typeof req.body.polltitle);
 	var title = req.body.polltitle;
 	var options = req.body.options;
+	console.log(options);
 	options = options.map(function(val){
-		return {text: val, count:0};	
+				if (val.length !== 0) {
+					return {text: val, count:0};
+				}
+	}).filter(function(val){
+		return val !== undefined;
 	});
+
+	if (options.length <= 1) {
+		res.render('polls/poll',{user:req.user, warning:"You need at least 2 options."});
+	}
 
 	var id = req.user._id;
 	console.log(options);
-	console.log({
+/*	console.log({
 		title: title,
 		options: options,
 		author: id
-	});
+	});*/
 
 	var poll = new Poll({
 		title: title,

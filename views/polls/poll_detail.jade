@@ -3,8 +3,7 @@ extends ../layout
 block content
 	content
 		.wrapper
-			.content-container
-				h1 #{poll.title} 
+			.content-container				
 				if (owner)
 					.btn.btn-success
 						a(href='edit/#{poll._id}') Edit
@@ -17,20 +16,20 @@ block content
 							a(href='toggle/#{poll._id}') deactive
 				h4 Started By 
 					a(href='/dashboard/#{poll.author.username}') #{poll.author.username}
-				br
+				h1 #{poll.title} 
 				if (voted)
+					.voteList
 					for option in poll.options
-						.voteList
-							button.btn.btn-primary #{option.text} 
-								span.badge 
-									| #{option.count} votes
-
+						.vote(style="margin-bottom: 12px")
+							label #{option.text} 
+							label #{option.count} votes
 				if (!voted)
 					form#voting(method='POST' action='?' onsubmit="return $('#submitVote').prop('disabled', true);")
 						.pullOptions
 							for option in poll.options
-								input(type='radio' name=poll._id value = option._id)
-								| #{option.text} -- #{option.count}
-								br
+								.ops(style="margin-bottom: 12px;")				
+									input(type='radio' name=poll._id value=option._id id=option._id)
+									label(for=option._id style='padding-left: 20px;') #{option.text} 
+	
 							input#submitVote(type='submit' value='Vote!')
 

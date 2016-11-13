@@ -1,26 +1,26 @@
 extends ../layout
 
 block content
-  .container
-    h1 New Poll
+	.container
+		h1 New Poll
+		form(role='form', action="/new/poll",method="post", style='max-width: 300px;')
+			.form-group
+				label Your poll title
+				input.form-control(type='text', name="polltitle", placeholder='Give this poll a title')
+			.form-group#inputOptions
+				label Poll choices
+				.input-group
+					input.form-control(type='text', name="options", placeholder='option')
+					span.input-group-btn
+						a.btn.btn-primary.addButton +
+				.input-group
+					input.form-control(type='text', name="options", placeholder='option')
+					span.input-group-btn
+						a.btn.btn-primary.addButton +
 
-    br
-    form(role='form', action="/new/poll",method="post", style='max-width: 300px;')
-      .form-group
-        label Your poll title
-        input.form-control(type='text', name="polltitle", placeholder='Give this poll a title')
-      .form-group#inputOptions
-        label Poll choices
-        .input-group
-          input.form-control(type='text', name="options", placeholder='option')
-          span.input-group-btn
-            a.btn.btn-primary.addButton +
-        .input-group
-          input.form-control(type='text', name="options", placeholder='option')
-          span.input-group-btn
-            a.btn.btn-primary.addButton +
+			button.btn.btn-default(type='submit') Submit
+			&nbsp;
+			a(href='/')
+				button.btn.btn-primary(type="button") Cancel
+		h3 #{warning}
 
-      button.btn.btn-default(type='submit') Submit
-      &nbsp;
-      a(href='/')
-        button.btn.btn-primary(type="button") Cancel
