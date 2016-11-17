@@ -1,18 +1,18 @@
 extends ../layout
 
 block content
-  .wrapper
-    .container
-      .form-title
-        h1 User Login
-      fieldset
-        form(role='form', action="/login",method="post")
-          .form-choice
-            input(type='text', name="username", placeholder='Enter Username')
-          .form-choice
-            input(type='password', name="password", placeholder='Password')
-      .form-choice
-        button(type='submit') Login
-        &nbsp;
-        a(href='/')
-          button.cancel(type="button") Cancel
+	.wrapper
+		.container
+			.form-title
+				h1 User Login  
+			form(role='form', action="/login",method="post")
+				fieldset
+					.form-choice
+						input(type='text', name="username", placeholder='Enter Username')
+					.form-choice
+						input(type='password', name="password", placeholder='Password')
+				.form-choice
+					button(type='submit') Login
+					&nbsp;
+					a(href='/')
+						button.cancel(type="button") Cancel
