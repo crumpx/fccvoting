@@ -86,6 +86,7 @@ a {
 .voteList {
 	width:500px;
 	background-color: #E0D1DE;
+	margin-top: 20px;
 	padding: 60px;
 	border: 1px solid #99658B;
 	border-radius: 8px;
