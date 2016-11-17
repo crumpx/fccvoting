@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
 	.populate('author')
 	.exec(function(err, result){
 	if (err) console.log(err);
-	res.render('index', {polls: result, title: "All Polls", user:req.user});
+	res.render('index', {polls: result, title: "F.C.C Voting App Project", user:req.user});
 	});
 }); 
 
