@@ -14,13 +14,17 @@ block content
 					p frontend:
 					li style all these freaking pages.....
 					li share to social media?
-
-
 				h2 Recent Polls
+
 				each poll in polls
 					if (poll.disabled == false)
-						.poll-list
-							span #{poll.author.username} has created 
-							a(href="/poll/#{poll._id}") #{poll.title}
+						a(href="/poll/#{poll._id}")
+							.poll-list
+								.poll-title
+									span #{poll.title}
+								.poll-creator
+									span Created By: #{poll.author.username}
+								.poll-date
+									span on #{poll.createdAt.toDateString()}
 
 //- index should have navbar, new polls listed, a search box to search poll title.

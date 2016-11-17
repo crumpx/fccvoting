@@ -1,19 +1,33 @@
 extends ../layout
 
 block content
-  .container
-    h1 Register Page
-    p.lead Say something worthwhile here.
-    br
-    form(role='form', action="/register",method="post", style='max-width: 300px;')
-      .form-group
-          input.form-control(type='text', name="username", placeholder='Enter Username')
-      .form-group
-        input.form-control(type='password', name="password", placeholder='Password')
-      button.btn.btn-default(type='submit') Submit
-      &nbsp;
-      a(href='/')
-        button.btn.btn-primary(type="button") Cancel
+	.wrapper
+		.container
+			if (error)
+				h4 #{error.message}
+			.form-title
+				h1 Register Page
+			form(role='form', action="/register",method="post")
+				fieldset
+					.form-choice
+						label(for='reg-fullname') Full Name:
+						br
+						input(type='text', id ='reg-fullname' name="fullname", placeholder='Enter Your Full Name' required)
+					.form-choice
+						label(for='reg-email') Your email:
+						br
+						input(type='email', id ='reg-email' name="email", placeholder='Enter Your Full Name' required)
+					.form-choice
+						label(for='reg-username') Username:
+						br
+						input(type='text', id='reg-username' name="username", placeholder='Enter Username' required)
+					.form-choice
+						label(for='reg-password') Password:
+						br
+						input(type='password', id='reg-password' name="password", placeholder='Password' required)
+				.form-choice()
+					button(type='submit') Register
+					&nbsp;
+					a(href='/')
+						button.cancel(type="button") Cancel
 
-      if (error)
-        h4 #{error.message}

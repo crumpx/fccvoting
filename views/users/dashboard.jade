@@ -1,46 +1,49 @@
 extends ../layout
 
 block content
-	.container
-		h1 #{user.username}'s Profile
-		//- p.lead Edit your user profile
-		br
-		if (ownPage)
-			form#profileEditForm(role='form', action="/dashboard", method="post", style='max-width: 300px;')
-				fieldset
-					.form-group
-						label Username: #{user.username}
-						
-					.form-group
-						Label Change Password
-						input.form-control#newPassword(type='password', name="newPassword", placeholder='New Password' required)
-						input.form-control#newPasswordConfirm(type='password', name="newPasswordConfirm", placeholder='Confirm Password' required)
-					button.btn.btn-default(type='submit') Submit
-					&nbsp;
-					a(href='/')
-						button.btn.btn-primary(type="button") Cancel
-		if (!ownPage)
-			h2 Their Polls
-		if (ownPage)
-			h2 My Polls
-		
-		if (ownPoll.length)
-			for poll in ownPoll
-				a(href='/poll/#{poll._id}') #{poll.title}
-		
-		if (ownPoll.length == 0) 
-			p Haven't stared any poll yet!
-
-
-
-		if (votedOn)
-			if (!ownPage)
-				h2 Their Votes
-			if (ownPage)
-				h2 My Votes
-			ul
-				for vote in votedOn
-					li 
-						a(href='/poll/#{vote.poll._id}') #{vote.poll.title}
-		if (votedOn.length == 0)
-			p Haven't voted on anything yet.
+	.wrapper-v
+			.container
+				.form-title
+					h1 #{user.fullname}'s Profile
+			.container
+				if (ownPage)	
+					form#profileEditForm(role='form', action="/dashboard", method="post")
+						fieldset
+							.form-choice				
+								label Username: #{user.username}
+							.form-choice
+								Label Change Password
+							.form-choice
+								input.form-control#newPassword(type='password', name="newPassword", placeholder='New Password' required)
+							.form-choice
+								input.form-control#newPasswordConfirm(type='password', name="newPasswordConfirm", placeholder='Confirm Password' required)
+							button(type='submit') Submit
+							&nbsp;
+							a(href='/')
+								button.cancel(type="button") Cancel
+			.poll-list-container
+				.poll-box
+					if (!ownPage)
+						h2 Their Polls
+					if (ownPage)
+						h2 My Polls	
+							
+					if (ownPoll.length)
+						for poll in ownPoll
+							.poll-item-box
+								a.black(href='/poll/#{poll._id}') #{poll.title}			
+					if (ownPoll.length == 0) 
+						p Haven't stared any poll yet!
+				.seperator
+				.poll-box
+					if (votedOn)
+						if (!ownPage)
+							h2 Their Votes
+						if (ownPage)
+							h2 My Votes
+					
+						for vote in votedOn
+							.poll-item-box
+								a.black(href='/poll/#{vote.poll._id}') #{vote.poll.title}
+						if (votedOn.length == 0)
+							p Haven't voted on anything yet.

@@ -1,15 +1,18 @@
 extends ../layout
 
 block content
-  .container
-    h1 Login Page
-
-    form(role='form', action="/login",method="post", style='max-width: 300px;')
-      .form-group
-          input.form-control(type='text', name="username", placeholder='Enter Username')
-      .form-group
-        input.form-control(type='password', name="password", placeholder='Password')
-      button.btn.btn-default(type='submit') Submit
-      &nbsp;
-      a(href='/')
-        button.btn.btn-primary(type="button") Cancel
+  .wrapper
+    .container
+      .form-title
+        h1 User Login
+      dataset
+        form(role='form', action="/login",method="post")
+          .form-choice
+            input(type='text', name="username", placeholder='Enter Username')
+          .form-choice
+            input(type='password', name="password", placeholder='Password')
+          .form-choice
+            button(type='submit') Login
+            &nbsp;
+            a(href='/')
+              button.cancel(type="button") Cancel

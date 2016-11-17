@@ -6,9 +6,32 @@ var Log = require('../models/log');
 var useragent = require('express-useragent');
 var router = express.Router();
 
+function getColor() {
+	var colors = [
+	'#F44336',
+	'#E91E63',
+	'#9C27B0',
+	'#673AB7',
+	'#3F51B5',
+	'#2196F3',
+	'#03A9F4',
+	'#00BCD4',
+	'#009688',
+	'#4CAF50',
+	'#8BC34A',
+	'#CDDC39',
+	'#FF5722',
+	'#607D8B',
+	'#FF3D00',
+	'#F57C00'
+	];
+	return colors[parseInt( Math.random() * 1 + ( Math.random() * (colors.length - 1) ))];
+}
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
-	Poll.find({}).select({title:1, author:1, disabled:1})
+	Poll.find({})
+	.sort('-createdAt')
 	.populate('author')
 	.exec(function(err, result){
 	if (err) console.log(err);
@@ -21,7 +44,8 @@ router.get('/register', function(req, res){
 });
 
 router.post('/register', function(req, res){
-	Account.register(new Account({ username: req.body.username}),
+	console.log(req.body);
+	Account.register(new Account({ username: req.body.username, fullname:req.body.fullname, email: req.body.fullname}),
 		req.body.password, function(err, account){
 			if (err) {
 				console.log(err);
@@ -79,12 +103,13 @@ router.post('/dashboard', function(req, res){
 });
 
 router.get('/dashboard/:username',function(req, res){
-	var id = req.user._id;
+	var id;
 	var ownPage = false
-	Account.findByUsername(req.params.username).then(function(user){
-		if (user.id == id) {
-			ownPage = true;
-		} 
+	Account.findByUsername(req.params.username).then(function(user){	
+		if (req.user)
+			if (user.id == req.user.id) {
+				ownPage = true;	
+			}
 
 		var ownPoll, votedOn;
 		Poll.find({author: user._id}, function(err, docs){
@@ -113,13 +138,6 @@ router.get('/users', function(req, res){
 	console.log(req.user);
 });
 
-// router.get('/polls', function(req, res){
-// 	Poll.find({}).select({title:1, options:1, author:1}).exec(function(err, result){
-// 		if (err) console.log(err);
-// 		console.log(result);
-// 		res.render('polls/polls', {polls: result, title: "All Polls"});
-// 	});
-// }); 
 
 router.get('/poll/:pollid', function(req, res){
 	console.log("You came from ",req.url);
@@ -161,7 +179,48 @@ router.get('/poll/:pollid', function(req, res){
 		if (user) {
 			owner = user.username == doc.author.username;
 		}
-		res.render('polls/poll_detail', {poll: doc, voted: voted, owner: owner, user: req.user});
+		var ownerUrl = "\<a href='/dashboard/" + doc.author._id + "'\>" + doc.author.fullname + "\</a\>"
+		console.log(ownerUrl)
+		var counts;
+		var chartData = {
+			type: "pie",
+			data: {
+				labels: doc.options.map(function(item){
+					return item.text;
+				}),
+				datasets: [{
+							data: doc.options.map(function(item){
+								return item.count;
+							}),
+							backgroundColor: doc.options.map(function(item){
+								return item.color;
+							}),
+							borderColor: doc.options.map(function(){
+								return getColor();
+							}),
+							borderWidth: 1
+					}]
+		},
+		options: {
+			title: {
+				display: true,
+				text: doc.title + " By " + doc.author.fullname,
+				fontStyle: "bold",
+				fontSize: 30,
+			},
+			legend: {
+            display: true,
+            labels: {
+                fontColor: "#666",
+                padding: 20
+            }
+        }
+		}
+	};
+		
+		chartData = JSON.stringify(chartData);
+		console.log('This is chartData: ', typeof chartData)
+		res.render('polls/poll_detail', {chartData: chartData, poll: doc, voted: voted, owner: owner, user: req.user});
 	});
 }) ;
 
@@ -175,18 +234,19 @@ router.post('/poll/:pollid', function(req, res){
 	} else {
 		log = new Log({ip: ip, poll: opId});	
 	}
+	console.log('req.body', req.body[opId]);
 
 	log.save(function(err, result){
 		if (err) {
 			console.log(err);
 		} else {
-			console.log(result);
+			// console.log(result);
 			Poll.findOne({_id:req.params.pollid})
 			.update(
 				{'options._id': req.body[opId]},
 				{$inc: {'options.$.count': 1}}, function(err, result){
 					if (err) console.log("ERROR",err);
-					console.log(result);
+					// console.log(result);
 					res.cookie(opId, true);
 					res.redirect(opId);
 				});
@@ -206,28 +266,26 @@ router.post('/new/poll', function(req, res){
 	console.log(typeof req.body.polltitle);
 	var title = req.body.polltitle;
 	var options = req.body.options;
+	var story = req.body.story;
 	console.log(options);
 	options = options.map(function(val){
 				if (val.length !== 0) {
-					return {text: val, count:0};
+					return {text: val, count:0, color: getColor()};
 				}
 	}).filter(function(val){
 		return val !== undefined;
 	});
+
+	console.log('options: ', options);
 
 	if (options.length <= 1) {
 		res.render('polls/poll',{user:req.user, warning:"You need at least 2 options."});
 	}
 
 	var id = req.user._id;
-	console.log(options);
-/*	console.log({
-		title: title,
-		options: options,
-		author: id
-	});*/
 
 	var poll = new Poll({
+		story: story,
 		title: title,
 		options: options,
 		author: id
@@ -298,12 +356,12 @@ router.get('/poll/toggle/:id', function(req, res){
 });
 
 router.get('/clear', function(req, res){
-	  Log.remove({poll:''}, function(err){
-    if (err) throw err;
-    else {
-    	res.redirect('/dashboard')
-    }
-  });
+		Log.remove({poll:''}, function(err){
+		if (err) throw err;
+		else {
+			res.redirect('/dashboard')
+		}
+	});
 })
 
 module.exports = router;

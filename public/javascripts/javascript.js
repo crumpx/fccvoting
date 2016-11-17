@@ -1,10 +1,10 @@
 $( document ).ready(function(){
-	var optionCount = $('#inputOptions');
-	var fieldHtml = '<div class="input-group"><input type="text" name="options" placeholder="option" class="form-control"><span class="input-group-btn"><a class="btn btn-primary removeButton">-</a></span></div>';
+	var optionCount = $('.form-choice');
+	var fieldHtml = '<div class="new-poll-choice-item"><input type="text" name="options" placeholder="option"><span class="removeButton">-</span></div>';
 	var inputCounts = 1;
 
 	$('.addButton').on('click',function(){
-		$('#inputOptions').append(fieldHtml);
+		$('.form-choice').append(fieldHtml);
 		optionCount++;
 	});
 

@@ -12,7 +12,9 @@ var Log = new Schema({
     	type: Schema.ObjectId,
     	ref: 'Poll'
     },
-    date: {type: Date, defalut: Date.now},
- });
+
+ }, {
+    timestamps: true
+});
 
 module.exports = mongoose.model('Log', Log);

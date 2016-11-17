@@ -2,23 +2,29 @@ extends ../layout
 
 block content
 	.container
-		h1 Editiing
-		h4 You may add options to your poll
+		h1 Editing
+		P You may add options to your poll
 		br
-		form(role='form', action="?",method="post", style='max-width: 300px;')
-			.form-group
-				label Your poll title
-				input.form-control(type='text', name="title", value='#{doc.title}')
-			.form-group#inputOptions
-				label Poll choices
-				for option in doc.options
-					input.form-control(type='text', name="", value='#{option.text}' disabled)
+		form(role='form', action="?",method="post")
+			fieldset
+				.form-title
+					label Your poll title
 					br
-				.input-group
-					input.form-control(type='text', name="options", placeholder='option')
-					span.input-group-btn
-						a.btn.btn-primary.addButton +
-			button.btn.btn-default(type='submit') Submit
-			&nbsp;
-			a(href='/')
-				button.btn.btn-primary(type="button") Cancel
+					input.form-control(type='text', name="title", value='#{doc.title}')
+				.form-title
+					label Poll choices
+					br
+					for option in doc.options
+						.form-title
+							input.form-control(type='text', name="", value='#{option.text}' disabled)
+							br
+				.new-poll-choice-item
+					input(type='text', name="options", placeholder='option')
+					.addButton
+						span +
+				.form-choice
+					
+				button(type='submit') Submit
+				&nbsp;
+				a(href='/')
+					button(type="button") Cancel

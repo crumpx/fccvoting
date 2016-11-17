@@ -6,17 +6,18 @@ html
 		//- link(href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css', rel='stylesheet', media='screen')
 		link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css')
 		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel='stylesheet', href='/stylesheets/icons.css')
+
 		block head
 
 	body
 		header
 			nav
 				.navbar
-					.brand
+					.nav-title
 						if (user)
-							span Logged in As 
-								a.username-button(href='/dashboard') #{user.username}
-					.nav-menu
+							span Logged in As #[a(href='/dashboard') #{user.username}]
+					.nav-item
 						ul
 							li
 								a(href='/') Home
@@ -29,14 +30,15 @@ html
 								li
 									a(href='/new/poll') Create a Poll
 								li
-									a(href='/dashboard') Dashboard
-								
+									a(href='/dashboard') Dashboard							
 								li
 									a(href="/logout") Logout
 
 		block content
 
 	script(src='https://code.jquery.com/jquery-3.1.1.min.js')
+	
 	script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js')
 	script(src='/javascripts/javascript.js')
 	script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+
