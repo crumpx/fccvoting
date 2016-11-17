@@ -1,8 +1,8 @@
 @import url('http://fonts.googleapis.com/css?family=Lato');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-
+@import url('https://fonts.googleapis.com/css?family=Work+Sans:900');
 body {
-	font-family: monospace;
+	font-family: 'Work Sans', sans-serif;
 }
 
 a {
@@ -14,6 +14,7 @@ canvas {
 	width: 60vw;
 	margin-top: 30px;
 }
+
 .navbar {
 	background-color: #8BC34A;
 	display: flex;
@@ -37,6 +38,12 @@ canvas {
 .navbar ul li:hover {
 	background-color: #FF9999;
 	border-radius: 5px;
+}
+
+.nav-title {
+	display: inline;
+	font-family: 'Work Sans', sans-serif;
+	font-weight: 900;
 }
 
 
