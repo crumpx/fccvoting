@@ -1,6 +1,7 @@
 @import url('http://fonts.googleapis.com/css?family=Lato');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:900');
+
 body {
 	font-family: 'Work Sans', sans-serif;
 }
@@ -8,11 +9,6 @@ body {
 a {
 	text-decoration: none;
 	color: white;
-}
-
-canvas {
-	width: 60vw;
-	margin-top: 30px;
 }
 
 .navbar {
@@ -87,6 +83,15 @@ canvas {
 	text-align: right;
 }
 
+.voteList {
+	width:500px;
+	background-color: #E0D1DE;
+	padding: 60px;
+	border: 1px solid #99658B;
+	border-radius: 8px;
+	box-shadow: -4px 0px 30px 0px rgba(0, 0, 0, 0.4);
+}
+
 .poll-list:hover {
 	box-shadow: -4px 0px 30px 0px rgba(0, 0, 0, 0.4);
 }
@@ -123,7 +128,7 @@ canvas {
 }
 
 .container-row {
-	margin-top: 10px;
+	margin: 20px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
@@ -231,7 +236,7 @@ button.cancel[type='button'] {
 }
 
 .pollOption {
-	font-family: 'Lato', sans-serif;
+
 	margin-bottom: 10px;
 	padding-bottom: 6px;
 	border-bottom: 1px solid black;

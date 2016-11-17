@@ -202,19 +202,15 @@ router.get('/poll/:pollid', function(req, res){
 					}]
 		},
 		options: {
-			title: {
-				display: true,
-				text: doc.title + " By " + doc.author.fullname,
-				fontStyle: "bold",
-				fontSize: 30,
-			},
 			legend: {
             display: true,
-            labels: {
+            labels: {           		
                 fontColor: "#666",
                 padding: 20
-            }
-        }
+            },
+            position:'right',
+        },
+
 		}
 	};
 		

@@ -17,17 +17,19 @@ block content
 							.h-menu
 								a.black(href='toggle/#{poll._id}') deactive
 				if (voted)
+					h1 #{poll.title}
+					h4 Started By 
+						a.black(href='/dashboard/#{poll.author.username}') #{poll.author.fullname}
+					p Poll description:
+					| #{poll.story}
 					.voteList
 						canvas#myChart
 						script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js')
 						script.
 							var data = "#{chartData}".replace(/&quot;/g, '"');
-							
-							//- console.log('hereherhrehre',JSON.parse(data));
 							var ctx = document.getElementById("myChart");
 							var myChart = new Chart(ctx, JSON.parse(data))
-					.left
-						p Poll description: #{poll.story}
+
 				if (!voted)
 					h1 #{poll.title}
 					h4 Started By 

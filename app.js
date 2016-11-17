@@ -52,7 +52,7 @@ passport.deserializeUser(Account.deserializeUser());
 
 // mongoose
 // mongoose.connect(process.env.MONGODB_URI);
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI || dbrui);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
