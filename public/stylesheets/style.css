@@ -11,6 +11,14 @@ a {
 	color: white;
 }
 
+.underline {
+	text-decoration: underline !important;
+}
+
+.underline:hover {
+	color: #8BC34A;
+}
+
 .navbar {
 	background-color: #8BC34A;
 	display: flex;

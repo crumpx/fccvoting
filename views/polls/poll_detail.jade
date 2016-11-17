@@ -18,8 +18,8 @@ block content
 								a.black(href='toggle/#{poll._id}') deactive
 				if (voted)
 					h1 #{poll.title}
-					h4 Started By 
-						a.black(href='/dashboard/#{poll.author.username}') #{poll.author.fullname}
+					p Started By 
+						a.black.underline(href='/dashboard/#{poll.author.username}') #{poll.author.fullname}
 					p Poll description:
 					| #{poll.story}
 					.voteList
