@@ -1,12 +1,13 @@
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
-@import url('https://fonts.googleapis.com/css?family=Work+Sans:900');
-
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Audiowide');
 @import url('https://fonts.googleapis.com/css?family=Bubblegum+Sans');
+@import url('https://fonts.googleapis.com/css?family=Josefin+Slab');
 
 
 body {
-	font-family: 'Work Sans', sans-serif;
-	background-color: rgb(235,235,235);
+	font-family: 'Open Sans', sans-serif;
+	background-color: #fff;
 }
 
 nav {
@@ -22,6 +23,17 @@ ul {
 	list-style: none;
 }
 
+fieldset {
+	padding: 20px;
+	margin-bottom: 20px;
+	border: 1px solid rgba(232,29,98,0.2);
+	box-shadow: -2px 2px 6px 0px rgba(0, 0, 0, 0.4);
+}
+
+fieldset:hover {
+	box-shadow: -4px 4px 6px 0px rgba(0, 0, 0, 0.4);
+}
+
 .hugh-text {
 	font-size: 3em;
 }
@@ -35,8 +47,8 @@ ul {
 }
 
 .right-20>a:hover {
-	background-color: #03A9F4;
-	color: rgb(0,6,17);
+	border: 1px solid #ffffff;
+	color: #212121;
 	transition: 0.4s;
 }
 
@@ -95,21 +107,21 @@ ul {
 
 .navbar {
 	width: 100%;
-	background-color: #4CAF50;
+	background-color: rgba(232,29,98,0.8);
 	display: flex;
 	align-items: center;
 	flex-direction:row;
 	justify-content: space-between;
-	padding:5px 10px;
+	padding:8px 10px;
 	border-bottom: 1px solid black;
 	position: fixed;
 }
 
 .nav-title {
 	display: inline;
-	font-family: 'Work Sans', sans-serif;
-	font-weight: 900;
+	font-family: 'Josefin Slab', serif;
 	font-size: 40px;
+
 }
 
 .nav-item {
@@ -119,18 +131,28 @@ ul {
 
 .user-icon a {
 	padding:8px;
-	font-family: 'Bubblegum Sans', cursive;
+	font-family: 'Josefin Slab', serif;
 	font-weight: 700i;
-	background-color: #00BCD4;
+	background-color: #8BC34A;
+	box-shadow: -5px 5px 20px 0px rgba(0, 0, 0, 0.4);
 	color: #ffffff;
 	border-radius: 4px;
+	border:0.2 solid #C2185B;
+	transition: 0.4s;
 }
 
 .user-icon a:hover {
-	background-color:#03A9F4;
-	color:black;
-	transition: 0.4s;
+	box-shadow: 1px 1px 20px 0px rgba(0, 0, 0, 0.4);
 }
+
+.user-icon a:active {
+	box-sizing: border-box;
+	background-color: #E91E63;
+	box-shadow: 1px 1px 6px 0px rgba(0, 0, 0, 0.4);
+	border:1px solid black;
+}
+
+
 /*contents*/
 
 .wrapper,
@@ -146,7 +168,8 @@ ul {
 
 .sub-nav {
 	width: 100%;
-	background-color: #C8E6C9;
+	background-color: rgba(116,116,116,0.1);
+	border-bottom: 1px solid #C2185B;
 	margin-top: -45px;
 	padding-top: 20px;
 	padding-bottom: 20px;
@@ -176,17 +199,16 @@ ul {
 	display: flex;
 	flex-direction: column;
 	color: black;
-	border: 1.5px solid black;
+	border: 1.5px solid #BDBDBD;
 	margin-left: 10px;
 	margin-right: 10px;
 	margin-bottom: 0px;
 	padding-bottom: 8px;
-	width: 65%;
-
+	box-shadow: -2px 2px 6px 0px rgba(0, 0, 0, 0.4);
 }
 
 .poll-list:hover {
-	box-shadow: -4px 0px 30px 0px rgba(0, 0, 0, 0.4);
+	box-shadow: -2px 0px 20px 0px rgba(0, 0, 0, 0.4);
 	transition: 0.4s;
 }
 
@@ -196,19 +218,18 @@ ul {
 	padding:8px;
 	text-align: center;
 	border-bottom: 1px solid black;
-	background-color: #BDBDBD;
+	background-color: #E91E63;
 }
 
 .poll-creator,
-.poll-story {
+.poll-story,
+.poll-date {
 	text-align: left;
 	padding: 12px 8px;
+	color: #757575;
 }
 
-
-
 .poll-date {
-	padding: 12px 8px;
 	text-align: center;
 }
 
@@ -234,14 +255,18 @@ ul {
 }
 .container-row a {
 	padding: 12px;
-	border: 1px solid rgb(88,85,98);
+	border: 1px solid #8BC34A;
 	border-radius: 4px;
+	transition: 0.4s;
 }
 
 .container-row a:hover {
-	background-color:rgb(88,85,98);
+	background-color:#8BC34A;
 	color: white;
-	transition: 0.4s;
+}
+
+a.black.delete:hover {
+	background-color: #E91E63;
 }
 
 .container h1 {
@@ -267,7 +292,7 @@ ul {
 
 .addButton::before {
 	content: "\f055";
-	color: #03A9F4;
+	color: #E91E63;
 }
 
 .addButton:hover::before {
@@ -290,6 +315,11 @@ ul {
 	color: #757575;
 }
 
+.removeButton:hover::before {
+	content: "\f056";
+	color: #212121;
+}
+
 
 /*input boxes*/
 
@@ -310,15 +340,17 @@ input[type="text"].focus {
 button[type='submit'],
 .vote {
 	padding: 10px;
-	background-color: #03A9F4;
+	border:1px solid #8BC34A;
 	border-radius: 5px;
-	color: white;
+	background-color:#fff; 
+	color: #8BC34A;
 }
 
 button[type='submit']:hover,
 .vote:hover {
-	background-color: #4CAF50;
+	background-color: #8BC34A;
 	cursor: pointer;
+	color: #212121;
 }
 
 
@@ -326,17 +358,19 @@ button.cancel[type='button'] {
 	padding: 10px;
 	background-color: #FFFFFF;
 	border-radius: 5px;
+	border: 1px solid #E91E63;
+	color: black;
+}
+
+button.cancel[type='button']:hover {
+	background-color: #E91E63;
+	color: white;
 }
 
 .poll-list-container {
 	display: flex;
 	margin: 0px 40px;
 	justify-content: center;
-}
-
-fieldset {
-	padding: 20px;
-	margin-bottom: 20px;
 }
 
 .poll-box {
@@ -400,8 +434,11 @@ fieldset {
   bottom: 0;
   left: 0;
   padding: 1rem;
-  background-color: #efefef;
+  background-color: rgb(232,29,98);
   text-align: center;
   border-top: 2px solid #E2E2e2;
 }
 
+.icons a:hover {
+	color: #8bc34a;
+}
