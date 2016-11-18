@@ -20,11 +20,12 @@ block content
 							.right-20
 								a.black(href='toggle/#{poll._id}') deactive
 				if (voted)
-					h1 #{poll.title}
-					p Started By 
+					.hugh-text.padding-bottom-10 #{poll.title}
+					.small-text.padding-bottom-10 Started By 
 						a.black.underline(href='/dashboard/#{poll.author.username}') #{poll.author.fullname}
-					p Poll description:
-					| #{poll.story}
+					.small-text.padding-bottom-10 Poll description:
+					.small-text.padding-bottom-10 #{poll.story}
+
 					.voteList
 						canvas#myChart
 						script(src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.js')
@@ -34,11 +35,11 @@ block content
 							var myChart = new Chart(ctx, JSON.parse(data))
 
 				if (!voted)
-					h1 #{poll.title}
-					h4 Started By 
+					.hugh-text.padding-bottom-10 #{poll.title}
+					.small-text.padding-bottom-10 Started By 
 						a.black(href='/dashboard/#{poll.author.username}') #{poll.author.fullname}
-					p Poll description:
-					| #{poll.story}
+					.small-text.padding-bottom-10 Poll description:
+					.small-text.padding-bottom-10.max-width-600 #{poll.story}
 					.container
 						form(method='POST' action='?' onsubmit="return $('#submitVote').prop('disabled', true);")
 							.poll-option-container

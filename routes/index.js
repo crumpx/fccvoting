@@ -71,11 +71,14 @@ router.get('/dashboard', function(req, res){
 		res.redirect('login');
 	} else {
 		var ownPoll, votedOn;
-		Poll.find({author: req.user._id}, function(err, docs){
+		Poll.find({author: req.user._id})
+		.sort('-createdAt')
+		.exec(function(err, docs){
 			if (err) console.log(err);
 			ownPoll = docs;
 			Log.find({voter: req.user._id})
 			.populate('poll')
+			.sort('-updatedAt')
 			.exec(function(err, docs){
 				if (err) console.log(err);
 				votedOn = docs;
@@ -114,11 +117,14 @@ router.get('/dashboard/:username',function(req, res){
 			}
 
 		var ownPoll, votedOn;
-		Poll.find({author: user._id}, function(err, docs){
+		Poll.find({author: user._id})
+		.sort('-createdAt')
+		.exec(function(err, docs){
 			if (err) console.log(err);
 			ownPoll = docs;
 			Log.find({voter: user._id})
 			.populate('poll')
+			.sort('-updatedAt')
 			.exec(function(err, docs){
 				if (err) console.log(err);
 				votedOn = docs;

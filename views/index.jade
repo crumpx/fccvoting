@@ -23,7 +23,7 @@ block content
 				each poll in polls
 					if (poll.disabled == false)
 						a(href="/poll/#{poll._id}")
-							.poll-list.long
+							.poll-list.max-width-600.min-width-600
 								.poll-title
 									span #{poll.title}
 								.poll-creator
