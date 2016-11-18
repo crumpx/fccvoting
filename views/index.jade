@@ -6,35 +6,24 @@ block head
 block content
 	content
 		.wrapper
-			.content-container
-				//- p TODO:
-				//- ol
-				//- 	p backend:
-				//- 	li user should enter old password when changing password in dashboard.
-				//- 	li social media stuff? social media authentication maybe
-				//- 	li more stuff in user dashboard 
-				//- ol
-				//- 	p frontend:
-				//- 	li style all these freaking pages.....
-				//- 	li share to social media?
-				ol
-					p Rules:
-					li Registered user can create, edit, delete, activate/deactivate polls create by him;
-					li When a registered user edit a poll, he can only add more voting options;
-					li Registered user can see polls he created, and polls he voted on in his dashboard;
-					li Registered user can change password in dashboard;
-					li Anonymous users can vote once in a poll with same computer/device;
-					li Anonymous users can vote and see voting results
-					li Any user can view any user's profile
-
-
+			.container
+				.sub-nav
+					.dummy Rules:
+						ol
+							li Registered user can create, edit, delete, activate/deactivate polls create by him;
+							li When a registered user edit a poll, he can only add more voting options;
+							li Registered user can see polls he created, and polls he voted on in his dashboard;
+							li Registered user can change password in dashboard;
+							li Anonymous users can vote once in a poll with same computer/device;
+							li Anonymous users can vote and see voting results
+							li Any user can view any user's profile
 
 				h2 10 Recent Polls
 
 				each poll in polls
 					if (poll.disabled == false)
 						a(href="/poll/#{poll._id}")
-							.poll-list
+							.poll-list.long
 								.poll-title
 									span #{poll.title}
 								.poll-creator
