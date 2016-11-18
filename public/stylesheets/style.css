@@ -27,7 +27,7 @@ ul {
 }
 
 .right-20>a:hover {
-	background-color: rgb(197,187,198);
+	background-color: #03A9F4;
 	color: rgb(0,6,17);
 }
 
@@ -89,12 +89,12 @@ ul {
 }
 
 .navbar {
-	background-color: rgba(0,6,17,0.7);
+	background-color: #4CAF50;
 	display: flex;
 	align-items: center;
 	flex-direction:row;
 	justify-content: space-between;
-	padding:0px 20px;
+	padding:5px 20px;
 	border-bottom: 1px solid black;
 }
 
@@ -111,19 +111,18 @@ ul {
 }
 
 
-
 .user-icon a {
 	padding:8px;
 	font-family: 'Bubblegum Sans', cursive;
 	font-weight: 700i;
-	background-color: rgba(197,187,198,0.9);
-	color: rgba(0,6,17,0.7);
+	background-color: #00BCD4;
+	color: #ffffff;
 	border-radius: 4px;
 }
 
 .user-icon a:hover {
-	background-color: rgb(88,85,98,0.5);
-	color:white;
+	background-color:#03A9F4;
+	color:black;
 }
 /*contents*/
 
@@ -140,7 +139,7 @@ ul {
 
 .voteList {
 	width:500px;
-	background-color: rgb(197,187,198,0.4);
+	background-color: #ffffff;
 	margin-top: 20px;
 	padding: 60px;
 	border: 1px solid #99658B;
@@ -173,7 +172,7 @@ ul {
 	padding:8px;
 	text-align: center;
 	border-bottom: 1px solid black;
-	background-color: rgb(54,71,118);
+	background-color: #4CAF50;
 }
 
 .poll-creator,
@@ -241,6 +240,7 @@ ul {
 
 .addButton::before {
 	content: "\f055";
+	color: #03A9F4;
 }
 
 .removeButton {
@@ -252,6 +252,7 @@ ul {
 
 .removeButton::before {
 	content: "\f056";
+	color: #757575;
 }
 
 
@@ -274,14 +275,14 @@ input[type="text"].focus {
 button[type='submit'],
 .vote {
 	padding: 10px;
-	background-color: rgb(52,112,90);
+	background-color: #03A9F4;
 	border-radius: 5px;
 	color: white;
 }
 
 button.cancel[type='button'] {
 	padding: 10px;
-	background-color: rgb(197,187,198, 0.5);
+	background-color: #FFFFFF;
 	border-radius: 5px;
 }
 
@@ -317,7 +318,6 @@ fieldset {
 }
 
 .pollOption {
-
 	margin-bottom: 10px;
 	padding-bottom: 6px;
 	border-bottom: 1px solid black;
