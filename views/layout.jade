@@ -16,32 +16,26 @@ html
 			nav
 				.navbar
 					.nav-title
-						h2 F.C.C Vote
-					.nav-logged
-						if (user)
-							span Logged in As #[a(href='/dashboard') #{user.username}]
-					.nav-item
-						ul
-							li
-								a(href='/') Home
-							if (!user)
-								li
-									a(href="/login") Login
-								li
-									a(href="/register") Register
-							if (user)
-								li
-									a(href='/new/poll') Create a Poll
-								li
-									a(href='/dashboard') Dashboard							
-								li
-									a(href="/logout") Logout
-
+						a(href='/') F.C.C Vote
+					.nav-item						
+						if (!loggedin)
+							.right-20
+								a(href="/login") Login
+							.right-20
+								a(href="/register") Register
+						if (loggedin)
+							.right-20
+								a(href='/new/poll') Create a Poll
+							.right-20
+								a(href='/dashboard') Dashboard							
+							.right-20
+								a(href="/logout") Log out
+							.right-20
+								span.user-icon(href='/dashboard') #{loggedin.fullname}
 		block content
 
 	script(src='https://code.jquery.com/jquery-3.1.1.min.js')
-	
-	script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js')
+	//- script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.15.1/jquery.validate.min.js')
 	script(src='/javascripts/javascript.js')
-	script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
+	//- script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js')
 

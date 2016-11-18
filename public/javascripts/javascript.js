@@ -1,6 +1,6 @@
 $( document ).ready(function(){
 	var optionCount = $('.form-choice');
-	var fieldHtml = '<div class="new-poll-choice-item"><input type="text" name="options" placeholder="option"><span class="removeButton">-</span></div>';
+	var fieldHtml = '<div class="new-poll-choice-item"><input class="short" type="text" name="options" placeholder="option"><span class="removeButton"></span></div>';
 	var inputCounts = 1;
 
 	$('.addButton').on('click',function(){
@@ -14,7 +14,7 @@ $( document ).ready(function(){
 		optionCount--; 
 	});
 
-	var password = document.getElementById("newPassword")
+	var password = document.getElementById("newPassword");
 	var confirm_password = document.getElementById("newPasswordConfirm");
 
 	function validatePassword(){

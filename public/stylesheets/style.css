@@ -1,14 +1,45 @@
-@import url('https://fonts.googleapis.com/css?family=Lato');
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 @import url('https://fonts.googleapis.com/css?family=Work+Sans:900');
 
+@import url('https://fonts.googleapis.com/css?family=Bubblegum+Sans');
+
+
 body {
 	font-family: 'Work Sans', sans-serif;
+	background-color: rgb(235,235,235);
+}
+
+nav {
+	color: white;
 }
 
 a {
 	text-decoration: none;
 	color: white;
+}
+
+ul {
+	list-style: none;
+}
+
+.center {
+	text-align: center;
+}
+
+.little {
+	width:14vw;
+}
+
+.short {
+	width: 20vw;
+}
+
+.mid {
+	width: 30vw;
+}
+
+.long {
+	width: 50vw;;
 }
 
 .underline {
@@ -20,7 +51,7 @@ a {
 }
 
 .navbar {
-	background-color: #8BC34A;
+	background-color: rgb(0,6,17);
 	display: flex;
 	align-items: center;
 	flex-direction:row;
@@ -29,28 +60,35 @@ a {
 	border-bottom: 1px solid black;
 }
 
-.navbar ul {
-	list-style: none;
-	display: flex;
-}
-
-.navbar ul li {
-	margin: 0px 15px;
-	padding: 5px 10px;
-}
-
-.navbar ul li:hover {
-	background-color: #FF9999;
-	border-radius: 5px;
-}
-
 .nav-title {
 	display: inline;
 	font-family: 'Work Sans', sans-serif;
 	font-weight: 900;
+	font-size: 40px;
 }
 
+.nav-item {
+	display: flex;
+	flex-direction: row;
+}
 
+.nav-item a {
+	padding: 13px;
+}
+
+.nav-item a:hover {
+	background-color: red;
+}
+
+.user-icon {
+	padding:13px;
+	font-family: 'Bubblegum Sans', cursive;
+	font-weight: 700i;
+	background-color: rgb(197,187,198);
+	color: rgb(0,6,17);
+	border-radius: 4px;
+
+}
 /*contents*/
 
 .wrapper {
@@ -66,6 +104,10 @@ a {
 
 .black {
 	color: black;
+}
+
+.white {
+	color: white;
 }
 
 /* recent polls */
@@ -93,7 +135,7 @@ a {
 
 .voteList {
 	width:500px;
-	background-color: #E0D1DE;
+	background-color: rgb(197,187,198,0.4);
 	margin-top: 20px;
 	padding: 60px;
 	border: 1px solid #99658B;
@@ -109,7 +151,7 @@ a {
 	font-size: 20px;
 	padding:8px;
 	text-align: center;
-	background-color: #689F38;
+	background-color: rgb(203,88,91);
 }
 
 .poll-creator {
@@ -129,7 +171,6 @@ a {
 
 .container {
 	margin-top: 20px;
-
 	display: flex;
 	flex-direction: column;
 	font-size: 20px;
@@ -144,17 +185,24 @@ a {
 }
 .container-row a {
 	padding: 12px;
-	border: 1px solid #74B648 ;
+	border: 1px solid rgb(88,85,98);
 	border-radius: 4px;
 }
 
 .container-row a:hover {
-	
-	background-color: #74B648;
+	background-color:rgb(202,75,101);
 }
 
-.h-menu {
+.right-20 {
 	margin-right: 20px;
+}
+
+.red {
+	background-color: rgb(151,18,19);
+}
+
+.less-red {
+	background-color: rgb(202,75,101);
 }
 
 .container h1 {
@@ -172,21 +220,25 @@ a {
 }
 
 .addButton  {
+	font-family: "FontAwesome";
 	margin-left: 8px;
 	margin-top: 6px;
 	font-size: 30px;
-
 }
 
-.addButton a {
-	color: black;
-	width: 60px;
+.addButton::before {
+	content: "\f055";
 }
 
 .removeButton {
+	font-family: "FontAwesome";
 	font-size: 30px;
 	margin-left: 8px;
 	margin-top: 6px;
+}
+
+.removeButton::before {
+	content: "\f056";
 }
 
 
@@ -196,7 +248,6 @@ input[type="text"],
 input[type="email"],
 input[type="password"] {
   padding: 10px;
-  width: 50vw;
   border: solid 1px #dcdcdc;
   transition: box-shadow 0.3s, border 0.3s;
 }
@@ -209,13 +260,14 @@ input[type="text"].focus {
 
 button[type='submit'] {
 	padding: 10px;
-	background-color: #81C784;
+	background-color: rgb(52,112,90);
 	border-radius: 5px;
+	color: white;
 }
 
 button.cancel[type='button'] {
 	padding: 10px;
-	background-color: #9E9E9E;
+	background-color: rgb(197,187,198, 0.5);
 	border-radius: 5px;
 }
 
@@ -225,9 +277,15 @@ button.cancel[type='button'] {
 	justify-content: center;
 }
 
+fieldset {
+	margin-bottom: 20px;
+}
+
 .poll-box {
 	text-align: left;
 }
+
+
 
 .seperator {
 	width: 80px;

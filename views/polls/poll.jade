@@ -10,24 +10,24 @@ block content
 					.form-title
 						label Your poll title
 						br
-						input(type='text', name="polltitle", placeholder='Give this poll a title')
+						input.mid(type='text', name="polltitle", placeholder='Give this poll a title')
 					.form-title
 						label Poll Story
 						br
-						input(type='text', name="story", placeholder='Give this poll a description')
+						input.mid(type='text', name="story", placeholder='Give this poll a description')
 					.form-choice
 						label Poll choices
 						.new-poll-choice-item
-							input(type='text', name="options", placeholder='option')
+							input.short(type='text', name="options", placeholder='option')
 							.addButton
-								span +
+
 						.new-poll-choice-item
-							input(type='text', name="options", placeholder='option')
+							input.short(type='text', name="options", placeholder='option')
 
-
-				button(type='submit') Submit
-				&nbsp;
-				a(href='/')
-					button.cancel(type="button") Cancel
+				.center
+					button(type='submit') Submit
+					&nbsp;
+					a(href='/')
+						button.cancel(type="button") Cancel
 			
 

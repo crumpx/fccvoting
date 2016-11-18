@@ -35,7 +35,7 @@ router.get('/', function(req, res, next) {
 	.populate('author')
 	.exec(function(err, result){
 	if (err) console.log(err);
-	res.render('index', {polls: result, title: "F.C.C Voting App Project", user:req.user});
+	res.render('index', {polls: result, title: "F.C.C Voting App Project", loggedin:req.user});
 	});
 }); 
 
@@ -78,7 +78,7 @@ router.get('/dashboard', function(req, res){
 			.exec(function(err, docs){
 				if (err) console.log(err);
 				votedOn = docs;
-				res.render('users/dashboard', {ownPage: true, user: req.user, ownPoll:ownPoll, votedOn: votedOn});
+				res.render('users/dashboard', {ownPage: true, loggedin: req.user, user: req.user, ownPoll:ownPoll, votedOn: votedOn});
 		});
 		});
 	}
@@ -104,7 +104,8 @@ router.post('/dashboard', function(req, res){
 
 router.get('/dashboard/:username',function(req, res){
 	var id;
-	var ownPage = false
+	console.log(req.user);
+	var ownPage = false;
 	Account.findByUsername(req.params.username).then(function(user){	
 		if (req.user)
 			if (user.id == req.user.id) {
@@ -120,7 +121,7 @@ router.get('/dashboard/:username',function(req, res){
 			.exec(function(err, docs){
 				if (err) console.log(err);
 				votedOn = docs;
-				res.render('users/dashboard', {ownPage: ownPage, user: user, ownPoll:ownPoll, votedOn: votedOn});
+				res.render('users/dashboard', {ownPage: ownPage, loggedin:req.user, user: user, ownPoll:ownPoll, votedOn: votedOn});
 		});
 		});
 
@@ -215,8 +216,8 @@ router.get('/poll/:pollid', function(req, res){
 	};
 		
 		chartData = JSON.stringify(chartData);
-		console.log('This is chartData: ', typeof chartData)
-		res.render('polls/poll_detail', {chartData: chartData, poll: doc, voted: voted, owner: owner, user: req.user});
+		console.log('This is chartData: ', typeof chartData);
+		res.render('polls/poll_detail', {chartData: chartData, poll: doc, voted: voted, owner: owner, loggedin:req.user, user: req.user});
 	});
 }) ;
 
@@ -254,7 +255,7 @@ router.get('/new/poll', function(req, res){
 	if (req.user === undefined){
 		res.redirect('/');
 	} else {
-		res.render('polls/poll',{user:req.user});
+		res.render('polls/poll',{user:req.user, loggedin: req.user});
 	}
 });
 
@@ -300,7 +301,7 @@ router.get('/poll/edit/:id',function(req, res){
 	Poll.findById(id, function(err, doc){
 		if (err) {console.log(err);}
 		else {
-			res.render('polls/poll_edit', {doc: doc});
+			res.render('polls/poll_edit', {doc: doc, loggedin: req.user});
 		}
 	});
 	} else {
@@ -312,7 +313,7 @@ router.post('/poll/edit/:id',function(req, res){
 	var id = req.params.id;
 	var title = req.body.title;
 	var options = Array.isArray(req.body.options)?req.body.options.map(function(val){
-		return {text:val, count:0}
+		return {text:val, count:0};
 	}) : req.body.options;
 
 	Poll.findOne({_id:id})
@@ -321,17 +322,17 @@ router.post('/poll/edit/:id',function(req, res){
 		{upsert:true}, 
 		function(err, result){
 		if (err) console.log(err);
-		res.redirect('/poll/'+id)
+		res.redirect('/poll/'+id);
 	});
 });
 
 router.get('/poll/delete/:id',function(req, res){
 	var id = req.params.id;
 	Poll.remove({_id: id},function(err, result){
-		if (err) {console.log(err)}
+		if (err) {console.log(err);}
 			else {
 				Log.remove({poll:id}, function(err){
-					if (err) {console.log(err)}
+					if (err) {console.log(err);}
 						else {res.redirect('/dashboard')}
 				});
 			}
@@ -355,9 +356,9 @@ router.get('/clear', function(req, res){
 		Log.remove({poll:''}, function(err){
 		if (err) throw err;
 		else {
-			res.redirect('/dashboard')
+			res.redirect('/dashboard');
 		}
 	});
-})
+});
 
 module.exports = router;

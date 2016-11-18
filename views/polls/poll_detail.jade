@@ -6,15 +6,15 @@ block content
 			.container
 				.container-row				
 					if (owner)
-						.h-menu			
+						.right-20			
 							a.black(href='edit/#{poll._id}') Edit
-						.h-menu
-							a.black(href='delete/#{poll._id}' onclick="return confirm('Are you sure you want to delete this item?');") Delete
+						.right-20
+							a.black.red(href='delete/#{poll._id}' onclick="return confirm('Are you sure you want to delete this item?');") Delete
 						if (poll.disabled)
-							.h-menu
+							.right-20
 								a.black(href='toggle/#{poll._id}') active
 						if (!poll.disabled)
-							.h-menu
+							.right-20
 								a.black(href='toggle/#{poll._id}') deactive
 				if (voted)
 					h1 #{poll.title}

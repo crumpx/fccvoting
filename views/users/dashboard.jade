@@ -14,13 +14,14 @@ block content
 							.form-choice
 								Label Change Password
 							.form-choice
-								input.form-control#newPassword(type='password', name="newPassword", placeholder='New Password' required)
+								input#newPassword(type='password', name="newPassword", placeholder='New Password' required)
 							.form-choice
-								input.form-control#newPasswordConfirm(type='password', name="newPasswordConfirm", placeholder='Confirm Password' required)
-							button(type='submit') Submit
-							&nbsp;
-							a(href='/')
-								button.cancel(type="button") Cancel
+								input#newPasswordConfirm(type='password', name="newPasswordConfirm", placeholder='Confirm Password' required)
+							.center
+								button(type='submit') Submit
+								&nbsp;
+								a(href='/')
+									button.cancel(type="button") Cancel
 			.poll-list-container
 				.poll-box
 					if (!ownPage)

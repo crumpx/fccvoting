@@ -10,21 +10,24 @@ block content
 				.form-title
 					label Your poll title
 					br
-					input.form-control(type='text', name="title", value='#{doc.title}')
+					input.mid(type='text', name="title", value='#{doc.title}' disabled)
+				.form-title
+					label Poll description
+					br
+					input.mid(type='text', name="title", value='#{doc.title}' disabled)
 				.form-title
 					label Poll choices
 					br
 					for option in doc.options
 						.form-title
-							input.form-control(type='text', name="", value='#{option.text}' disabled)
+							input.short(type='text', name="", value='#{option.text}' disabled)
 							br
 				.new-poll-choice-item
-					input(type='text', name="options", placeholder='option')
+					input.short(type='text', name="options", placeholder='option')
 					.addButton
-						span +
 				.form-choice
-					
+			.center		
 				button(type='submit') Submit
 				&nbsp;
 				a(href='/')
-					button(type="button") Cancel
+					button.cancel(type="button") Cancel
