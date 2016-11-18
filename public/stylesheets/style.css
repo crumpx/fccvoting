@@ -27,19 +27,19 @@ ul {
 }
 
 .little {
-	width:14vw;
+	min-width:14vw;
 }
 
 .short {
-	width: 20vw;
+	min-width: 20vw;
 }
 
 .mid {
-	width: 30vw;
+	min-width: 30vw;
 }
 
 .long {
-	width: 50vw;;
+	min-width: 50vw;;
 }
 
 .underline {
@@ -258,7 +258,8 @@ input[type="text"].focus {
   box-shadow: 0 0 5px 1px #969696;
 }
 
-button[type='submit'] {
+button[type='submit'],
+.vote {
 	padding: 10px;
 	background-color: rgb(52,112,90);
 	border-radius: 5px;

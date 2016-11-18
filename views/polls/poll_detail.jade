@@ -39,10 +39,10 @@ block content
 					.container
 						form(method='POST' action='?' onsubmit="return $('#submitVote').prop('disabled', true);")
 							.poll-option-container
-								fieldset
+								fieldset.short
 									for option in poll.options
 										.pollOption
 											input(type='radio' name=poll._id value=option._id id=option._id)
 											.label-text
 												label(for=option._id) #{option.text}
-									input.right#submitVote(type='submit' value='Vote!')
+								input.vote#submitVote(type='submit' value='Vote!')
