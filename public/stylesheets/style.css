@@ -29,6 +29,7 @@ ul {
 .right-20>a:hover {
 	background-color: #03A9F4;
 	color: rgb(0,6,17);
+	transition: 0.4s;
 }
 
 .right-20 {
@@ -110,7 +111,6 @@ ul {
 	flex-direction: row;
 }
 
-
 .user-icon a {
 	padding:8px;
 	font-family: 'Bubblegum Sans', cursive;
@@ -123,6 +123,7 @@ ul {
 .user-icon a:hover {
 	background-color:#03A9F4;
 	color:black;
+	transition: 0.4s;
 }
 /*contents*/
 
@@ -214,7 +215,9 @@ ul {
 }
 
 .container-row a:hover {
-	background-color:rgb(202,75,101);
+	background-color:rgb(88,85,98);
+	color: white;
+	transition: 0.4s;
 }
 
 .container h1 {
@@ -231,7 +234,7 @@ ul {
 	display: flex;
 }
 
-.addButton  {
+.addButton {
 	font-family: "FontAwesome";
 	margin-left: 8px;
 	margin-top: 6px;
@@ -242,6 +245,14 @@ ul {
 	content: "\f055";
 	color: #03A9F4;
 }
+
+.addButton:hover::before {
+	content: "\f055";
+	color: #4CAF50;
+	transition: 0.4s;
+	cursor: pointer;
+}
+
 
 .removeButton {
 	font-family: "FontAwesome";
@@ -280,6 +291,13 @@ button[type='submit'],
 	color: white;
 }
 
+button[type='submit']:hover,
+.vote:hover {
+	background-color: #4CAF50;
+	cursor: pointer;
+}
+
+
 button.cancel[type='button'] {
 	padding: 10px;
 	background-color: #FFFFFF;
@@ -293,14 +311,13 @@ button.cancel[type='button'] {
 }
 
 fieldset {
+	padding: 20px;
 	margin-bottom: 20px;
 }
 
 .poll-box {
 	text-align: left;
 }
-
-
 
 .seperator {
 	width: 80px;
@@ -323,8 +340,22 @@ fieldset {
 	border-bottom: 1px solid black;
 }
 
+.pollOption:hover {
+
+}
+
+
 .pollOption label {	
 	margin-left: 8px;
+	cursor: pointer;
+	transition: 0.4s;
+}
+
+.pollOption label:hover {	
+	/*font-size: 1.05em;*/
+	color:   #4CAF50;
+	padding:2px 8px;
+
 }
 
 .pollOption input[type='radio'] {	
@@ -339,7 +370,9 @@ fieldset {
 	content: '\f192';
 }
 
-.pollOption label:hover {
+/*.pollOption:hover {
 	cursor: pointer;
-}
+	background-color: #C8E6C9;
+	border: 0.4px solid black;
+}*/
 
