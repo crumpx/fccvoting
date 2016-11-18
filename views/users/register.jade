@@ -1,12 +1,15 @@
 extends ../layout
 
+block head
+	title Register
+
 block content
 	.wrapper
 		.container
 			if (error)
 				h4 #{error.message}
 			.form-title
-				h1 Register Page
+				h1 Register
 			form(role='form', action="/register",method="post")
 				fieldset
 					.form-choice

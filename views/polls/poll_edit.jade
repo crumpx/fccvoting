@@ -1,33 +1,37 @@
 extends ../layout
 
+block head
+	title Editing #{doc.title}
+
 block content
-	.container
-		h1 Editing
-		P You may add options to your poll
-		br
-		form(role='form', action="?",method="post")
-			fieldset
-				.form-title
-					label Your poll title
-					br
-					input.mid(type='text', name="title", value='#{doc.title}' disabled)
-				.form-title
-					label Poll description
-					br
-					input.mid(type='text', name="title", value='#{doc.title}' disabled)
-				.form-title
-					label Poll choices
-					br
-					for option in doc.options
-						.form-title
-							input.short(type='text', name="", value='#{option.text}' disabled)
-							br
-				.new-poll-choice-item
-					input.short(type='text', name="options", placeholder='option')
-					.addButton
-				.form-choice
-			.center		
-				button(type='submit') Submit
-				&nbsp;
-				a(href='/')
-					button.cancel(type="button") Cancel
+	.wrapper
+		.container
+			h1 Editing
+			P You may add options to your poll
+			br
+			form(role='form', action="?",method="post")
+				fieldset
+					.form-title
+						label Your poll title
+						br
+						input.mid(type='text', name="title", value='#{doc.title}' disabled)
+					.form-title
+						label Poll description
+						br
+						input.mid(type='text', name="title", value='#{doc.title}' disabled)
+					.form-title
+						label Poll choices
+						br
+						for option in doc.options
+							.form-title
+								input.short(type='text', name="", value='#{option.text}' disabled)
+								br
+					.new-poll-choice-item
+						input.short(type='text', name="options", placeholder='option')
+						.addButton
+					.form-choice
+				.center		
+					button(type='submit') Submit
+					&nbsp;
+					a(href='/')
+						button.cancel(type="button") Cancel
