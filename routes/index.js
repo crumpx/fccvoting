@@ -31,6 +31,7 @@ function getColor() {
 /* GET home page. */
 router.get('/', function(req, res, next) {
 	Poll.find({})
+	.limit(10)
 	.sort('-createdAt')
 	.populate('author')
 	.exec(function(err, result){
@@ -45,7 +46,7 @@ router.get('/register', function(req, res){
 
 router.post('/register', function(req, res){
 	console.log(req.body);
-	Account.register(new Account({ username: req.body.username, fullname:req.body.fullname, email: req.body.fullname}),
+	Account.register(new Account({ username: req.body.username, fullname:req.body.fullname, email: req.body.email}),
 		req.body.password, function(err, account){
 			if (err) {
 				console.log(err);

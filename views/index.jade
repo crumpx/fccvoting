@@ -23,10 +23,10 @@ block content
 					li Anonymous users can vote once in a poll with same computer/device;
 					li Anonymous users can vote and see voting results
 					li Any user can view any user's profile
-					
 
 
-				h2 Recent Polls
+
+				h2 10 Recent Polls
 
 				each poll in polls
 					if (poll.disabled == false)
@@ -36,6 +36,8 @@ block content
 									span #{poll.title}
 								.poll-creator
 									span Created By: #{poll.author.username}
+								.poll-story
+									span Description: #{poll.story}
 								.poll-date
 									span on #{poll.createdAt.toDateString()}
 

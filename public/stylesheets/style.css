@@ -22,6 +22,44 @@ ul {
 	list-style: none;
 }
 
+.right-20>a {
+	padding: 13px;
+}
+
+.right-20>a:hover {
+	background-color: rgb(197,187,198);
+	color: rgb(0,6,17);
+}
+
+.right-20 {
+	margin-right: 20px;
+}
+
+.red {
+	background-color: rgb(151,18,19);
+}
+
+.less-red {
+	background-color: rgb(202,75,101);
+}
+
+
+.black {
+	color: black;
+}
+
+.white {
+	color: white;
+}
+
+.left {
+	text-align: left;
+}
+
+.right {
+	text-align: right;
+}
+
 .center {
 	text-align: center;
 }
@@ -72,14 +110,7 @@ ul {
 	flex-direction: row;
 }
 
-.right-20>a {
-	padding: 13px;
-}
 
-.right-20>a:hover {
-	background-color: rgb(197,187,198);
-	color: rgb(0,6,17);
-}
 
 .user-icon a {
 	padding:8px;
@@ -107,37 +138,6 @@ ul {
 	flex-direction: column;
 }
 
-.black {
-	color: black;
-}
-
-.white {
-	color: white;
-}
-
-/* recent polls */
-
-.poll-list {
-	/*margin-top: 1px;*/
-	display: flex;
-	flex-direction: column;
-	color: black;
-	border: 0.5px solid black;
-	margin-left: 10px;
-	margin-right: 10px;
-	margin-bottom: 6px;
-	padding-bottom: 8px;
-	border-radius: 5px;
-}
-
-.left {
-	text-align: left;
-}
-
-.right {
-	text-align: right;
-}
-
 .voteList {
 	width:500px;
 	background-color: rgb(197,187,198,0.4);
@@ -148,21 +148,41 @@ ul {
 	box-shadow: -4px 0px 30px 0px rgba(0, 0, 0, 0.4);
 }
 
+/* recent polls */
+
+.poll-list {
+	display: flex;
+	flex-direction: column;
+	color: black;
+	border: 1.5px solid black;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 0px;
+	padding-bottom: 8px;
+
+}
+
 .poll-list:hover {
 	box-shadow: -4px 0px 30px 0px rgba(0, 0, 0, 0.4);
+	transition: 0.4s;
 }
 
 .poll-title {
+	color: white;
 	font-size: 20px;
 	padding:8px;
 	text-align: center;
-	background-color: rgb(203,88,91);
+	border-bottom: 1px solid black;
+	background-color: rgb(54,71,118);
 }
 
-.poll-creator {
-	text-align: right;
+.poll-creator,
+.poll-story {
+	text-align: left;
 	padding: 12px 8px;
 }
+
+
 
 .poll-date {
 	padding: 12px 8px;
@@ -196,18 +216,6 @@ ul {
 
 .container-row a:hover {
 	background-color:rgb(202,75,101);
-}
-
-.right-20 {
-	margin-right: 20px;
-}
-
-.red {
-	background-color: rgb(151,18,19);
-}
-
-.less-red {
-	background-color: rgb(202,75,101);
 }
 
 .container h1 {
